@@ -1,14 +1,18 @@
 package eldar.creditcardprocessor.model.Operacion;
 
 import com.sun.istack.internal.NotNull;
-import eldar.creditcardprocessor.Exceptions.OperacionProcessException;
+import eldar.creditcardprocessor.exceptions.OperacionProcessException;
 import eldar.creditcardprocessor.model.Card.Card;
+import eldar.creditcardprocessor.model.Tasa;
 
-import static eldar.creditcardprocessor.Exceptions.OperacionProcessException.OperacionProcessErrorEnum.AMOUNT_TOO_HIGH;
+import java.io.Serializable;
+
+import static eldar.creditcardprocessor.exceptions.OperacionProcessException.OperacionProcessErrorEnum.AMOUNT_TOO_HIGH;
 
 
-public class Operacion {
+public class Operacion implements Serializable {
 
+    private static final long serialVersionUID = -7687337068767056591L;
     Card tarjeta;
     Double monto;
 
@@ -39,5 +43,9 @@ public class Operacion {
 
     public void validarOperacion() throws OperacionProcessException {
         if(!checkMonto()) throw new OperacionProcessException(AMOUNT_TOO_HIGH);
+    }
+
+    public Tasa informarTasa() {
+        return getTarjeta().informarTasa(getMonto());
     }
 }

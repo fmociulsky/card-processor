@@ -3,16 +3,13 @@ package eldar.creditcardprocessor;
 import eldar.creditcardprocessor.model.Card.Card;
 import eldar.creditcardprocessor.model.Card.CardEnum;
 import eldar.creditcardprocessor.model.Card.VisaCard;
-import eldar.creditcardprocessor.model.CardProcessor;
 import eldar.creditcardprocessor.model.Operacion.Operacion;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.Month;
-import java.util.List;
 
-import static eldar.creditcardprocessor.model.Card.Card.MSJ_TASA;
 import static eldar.creditcardprocessor.model.Card.Card.TO_STRING;
 import static eldar.creditcardprocessor.model.Card.CardEnum.AMEX;
 import static eldar.creditcardprocessor.model.Card.CardEnum.NARA;
@@ -28,7 +25,7 @@ class CreditCardProcessorApplicationTests {
 	void getObtenerInfoTarjetTest() {
 		iniciarTarjetas();
 		final String allInfo = cardProcessor.getTarjetas().get(0).getAllInfo();
-		Assertions.assertThat(allInfo).isEqualTo(String.format(TO_STRING, VISA.getValue(), 123456, "Lionel Messi", Month.AUGUST.getValue(), 2025));
+		Assertions.assertThat(allInfo).isEqualTo(String.format(TO_STRING, VISA.getValue(), 123456, "Lionel Messi", Month.MAY.getValue(), 2025));
 	}
 
 	@Test
@@ -66,8 +63,8 @@ class CreditCardProcessorApplicationTests {
 	@Test
 	void tarjetasIgualesOKTest() {
 		iniciarTarjetas();
-		final Card card = new VisaCard(123456, "Lionel Messi", Month.AUGUST.getValue(), 2025);
-		final boolean iguales = card.equals(cardProcessor.getTarjetas().get(0));;
+		final Card card = new VisaCard(123456, "Lionel Messi", Month.MAY.getValue(), 2025);
+		final boolean iguales = card.equals(cardProcessor.getTarjetas().get(0));
 		Assertions.assertThat(iguales).isTrue();
 	}
 

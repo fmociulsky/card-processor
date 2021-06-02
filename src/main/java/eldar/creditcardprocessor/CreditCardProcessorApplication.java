@@ -2,11 +2,12 @@ package eldar.creditcardprocessor;
 
 import eldar.creditcardprocessor.model.Card.Card;
 import eldar.creditcardprocessor.model.Card.VisaCard;
-import eldar.creditcardprocessor.model.CardProcessor;
 import eldar.creditcardprocessor.model.Operacion.Operacion;
+import eldar.creditcardprocessor.model.Tasa;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import static eldar.creditcardprocessor.model.Card.Card.MSJ_TASA;
 import static java.time.Month.FEBRUARY;
 
 @SpringBootApplication
@@ -31,9 +32,12 @@ public class CreditCardProcessorApplication {
 		final Card card4 = new VisaCard(98765, "Gabriel Batistuta", FEBRUARY.getValue(), 2030);
 		cardProcessor.procesarOperacion(new Operacion(card4, 200d));
 
-		System.out.println(card1.informarTasa(1000d));
-		System.out.println(card2.informarTasa(1000d));
-		System.out.println(card3.informarTasa(1000d));
+		Tasa tasaVisa = card1.informarTasa(1000d);
+		System.out.println(String.format(MSJ_TASA, tasaVisa.getMarca(), tasaVisa.getImporte()));
+		Tasa tasaNara = card2.informarTasa(1000d);
+		System.out.println(String.format(MSJ_TASA, tasaNara.getMarca(), tasaNara.getImporte()));
+		Tasa tasaAmex = card3.informarTasa(1000d);
+		System.out.println(String.format(MSJ_TASA, tasaAmex.getMarca(), tasaAmex.getImporte()));
 	}
 
 }

@@ -1,6 +1,8 @@
 package eldar.creditcardprocessor.model.Card;
 
-public enum CardEnum {
+import java.io.Serializable;
+
+public enum CardEnum implements Serializable {
 
         VISA("VISA"),
         NARA("NARA"),

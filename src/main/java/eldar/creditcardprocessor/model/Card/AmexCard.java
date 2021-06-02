@@ -16,11 +16,5 @@ public class AmexCard extends Card{
         return tasa;
     }
 
-    @Override
-    public String informarTasa(double monto) {
-        final double importe = monto * calcularTasa() / 100;
-        return String.format(MSJ_TASA, getMarca().getValue(), importe);
-    }
-
     static final double COEFICIENTE = 0.1;
 }

@@ -1,15 +1,18 @@
 package eldar.creditcardprocessor.model.Card;
 
-import eldar.creditcardprocessor.Exceptions.CardProcessException;
+import eldar.creditcardprocessor.exceptions.CardProcessException;
+import eldar.creditcardprocessor.model.Tasa;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
-import static eldar.creditcardprocessor.Exceptions.CardProcessException.CardMensajesErrorEnum.CARD_DATA_WRONG;
-import static eldar.creditcardprocessor.Exceptions.CardProcessException.CardMensajesErrorEnum.EXPIRED_CARD;
+import static eldar.creditcardprocessor.exceptions.CardProcessException.CardMensajesErrorEnum.CARD_DATA_WRONG;
+import static eldar.creditcardprocessor.exceptions.CardProcessException.CardMensajesErrorEnum.EXPIRED_CARD;
 
-public abstract class Card{
+public abstract class Card implements Serializable {
 
+    private static final long serialVersionUID = 5853685590689946429L;
     private CardEnum marca;
     private Integer numero;
     private String cardHolder;
@@ -66,7 +69,10 @@ public abstract class Card{
 
     public abstract double calcularTasa();
 
-    public abstract String informarTasa(double monto);
+    public Tasa informarTasa(double monto){
+        final double importe = monto * calcularTasa() / 100;
+        return new Tasa(getMarca().getValue(), importe);
+    };
 
 
     public void isValid(List<Card> tarjetas) throws CardProcessException {

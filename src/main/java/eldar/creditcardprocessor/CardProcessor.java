@@ -1,7 +1,7 @@
-package eldar.creditcardprocessor.model;
+package eldar.creditcardprocessor;
 
-import eldar.creditcardprocessor.Exceptions.CardProcessException;
-import eldar.creditcardprocessor.Exceptions.OperacionProcessException;
+import eldar.creditcardprocessor.exceptions.CardProcessException;
+import eldar.creditcardprocessor.exceptions.OperacionProcessException;
 import eldar.creditcardprocessor.model.Card.AmexCard;
 import eldar.creditcardprocessor.model.Card.Card;
 import eldar.creditcardprocessor.model.Card.CardEnum;

@@ -1,5 +1,7 @@
 package eldar.creditcardprocessor.model.Card;
 
+import eldar.creditcardprocessor.model.Tasa;
+
 import java.time.LocalDate;
 
 public class VisaCard extends Card {
@@ -17,11 +19,4 @@ public class VisaCard extends Card {
 
         return tasa;
     }
-
-    @Override
-    public String informarTasa(double monto) {
-        final double importe = monto * calcularTasa() / 100;
-        return String.format(MSJ_TASA, getMarca().getValue(), importe);
-    }
-
 }

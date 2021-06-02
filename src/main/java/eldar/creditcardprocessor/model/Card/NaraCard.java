@@ -1,5 +1,7 @@
 package eldar.creditcardprocessor.model.Card;
 
+import eldar.creditcardprocessor.model.Tasa;
+
 import java.time.LocalDate;
 
 public class NaraCard extends Card{
@@ -13,12 +15,6 @@ public class NaraCard extends Card{
         if(tasa < MIN) return MIN;
         if(tasa > MAX) return MAX;
         return tasa;
-    }
-
-    @Override
-    public String informarTasa(double monto) {
-        final double importe = monto * calcularTasa() / 100;
-        return String.format(MSJ_TASA, getMarca().getValue(), importe);
     }
 
     static final double COEFICIENTE = 0.5;

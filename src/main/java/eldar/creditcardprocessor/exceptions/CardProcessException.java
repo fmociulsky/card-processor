@@ -1,4 +1,4 @@
-package eldar.creditcardprocessor.Exceptions;
+package eldar.creditcardprocessor.exceptions;
 
 public class CardProcessException extends Exception {
 
