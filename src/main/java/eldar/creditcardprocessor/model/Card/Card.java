@@ -66,7 +66,7 @@ public abstract class Card{
 
     public abstract double calcularTasa();
 
-    public abstract void informarTasa(double monto);
+    public abstract String informarTasa(double monto);
 
 
     public void isValid(List<Card> tarjetas) throws CardProcessException {
@@ -84,9 +84,8 @@ public abstract class Card{
         return !fechaVencimiento.isBefore(LocalDate.now());
     }
 
-    public void getAllInfo() {
-        final String info = String.format("Marca %s, Numero %d, Titular %s, Vencimiento %d/%d", getMarca().getValue(), getNumero(), getCardHolder(), getMesVencimiento(), getAnoVencimiento());
-        System.out.println(info);
+    public String getAllInfo() {
+        return toString();
     }
 
     @Override
@@ -103,6 +102,13 @@ public abstract class Card{
                 && card.getAnoVencimiento() == getAnoVencimiento();
     }
 
+    @Override
+    public String toString() {
+        return String.format(TO_STRING, getMarca().getValue(), getNumero(), getCardHolder(), getMesVencimiento(), getAnoVencimiento());
+    }
+
     static final double MIN = 0.3;
     static final double MAX = 5;
+    public static final String TO_STRING = "Marca %s, Numero %d, Titular %s, Vencimiento %d/%d";
+    public static final String MSJ_TASA = "El importe de tasa para la tarjeta de marca %s es de %,.2f";
 }

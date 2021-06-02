@@ -1,10 +1,11 @@
-package eldar.creditcardprocessor.model;
+package eldar.creditcardprocessor.model.Operacion;
 
 import com.sun.istack.internal.NotNull;
 import eldar.creditcardprocessor.Exceptions.OperacionProcessException;
 import eldar.creditcardprocessor.model.Card.Card;
 
-import static eldar.creditcardprocessor.Exceptions.OperacionProcessException.CardMensajesErrorEnum.AMOUNT_TOO_HIGH;
+import static eldar.creditcardprocessor.Exceptions.OperacionProcessException.OperacionProcessErrorEnum.AMOUNT_TOO_HIGH;
+
 
 public class Operacion {
 

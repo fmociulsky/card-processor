@@ -1,14 +1,11 @@
 package eldar.creditcardprocessor;
 
 import eldar.creditcardprocessor.model.Card.Card;
-import eldar.creditcardprocessor.model.Card.CardEnum;
 import eldar.creditcardprocessor.model.Card.VisaCard;
 import eldar.creditcardprocessor.model.CardProcessor;
-import eldar.creditcardprocessor.model.Operacion;
+import eldar.creditcardprocessor.model.Operacion.Operacion;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import java.time.Month;
 
 import static java.time.Month.FEBRUARY;
 
@@ -17,8 +14,13 @@ public class CreditCardProcessorApplication {
 
 	public static void main(String[] args) {
 
+		SpringApplication.run(CreditCardProcessorApplication.class, args);
+
 		final CardProcessor cardProcessor = new CardProcessor();
+		//Cargo 3 tarjetas en el sistema.
 		cardProcessor.iniciarTarjetas();
+
+		//prueba de operacion con tarjetas
 		final Card card1 = cardProcessor.getTarjetas().get(0);
 		card1.getAllInfo();
 		cardProcessor.procesarOperacion(new Operacion(card1, 500d));
@@ -29,11 +31,9 @@ public class CreditCardProcessorApplication {
 		final Card card4 = new VisaCard(98765, "Gabriel Batistuta", FEBRUARY.getValue(), 2030);
 		cardProcessor.procesarOperacion(new Operacion(card4, 200d));
 
-		card1.informarTasa(1000d);
-		card2.informarTasa(1000d);
-		card3.informarTasa(1000d);
-
-		SpringApplication.run(CreditCardProcessorApplication.class, args);
+		System.out.println(card1.informarTasa(1000d));
+		System.out.println(card2.informarTasa(1000d));
+		System.out.println(card3.informarTasa(1000d));
 	}
 
 }

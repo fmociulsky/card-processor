@@ -9,16 +9,17 @@ public class AmexCard extends Card{
 
     @Override
     public double calcularTasa() {
-        final double tasa =  getMesVencimiento() * COEFICIENTE;
+
+        final double tasa =  LocalDate.now().getMonth().getValue() * COEFICIENTE;
         if(tasa < MIN) return MIN;
         if(tasa > MAX) return MAX;
         return tasa;
     }
 
     @Override
-    public void informarTasa(double monto) {
+    public String informarTasa(double monto) {
         final double importe = monto * calcularTasa() / 100;
-        System.out.println(String.format("El importe de tasa para la tarjeta de marca %s es de %,.2f", getMarca().getValue(), importe));
+        return String.format(MSJ_TASA, getMarca().getValue(), importe);
     }
 
     static final double COEFICIENTE = 0.1;

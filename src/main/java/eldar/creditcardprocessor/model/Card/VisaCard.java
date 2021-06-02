@@ -10,7 +10,8 @@ public class VisaCard extends Card {
 
     @Override
     public double calcularTasa() {
-        final double tasa = (double) (getAnoVencimiento() % 100) / (double) getMesVencimiento();
+        final LocalDate now = LocalDate.now();
+        final double tasa = (double) (now.getYear() % 100) / (double) now.getMonth().getValue();
         if(tasa < MIN) return MIN;
         if(tasa > MAX) return MAX;
 
@@ -18,9 +19,9 @@ public class VisaCard extends Card {
     }
 
     @Override
-    public void informarTasa(double monto) {
+    public String informarTasa(double monto) {
         final double importe = monto * calcularTasa() / 100;
-        System.out.println(String.format("El importe de tasa para la tarjeta de marca %s es de %,.2f", getMarca().getValue(), importe));
+        return String.format(MSJ_TASA, getMarca().getValue(), importe);
     }
 
 }

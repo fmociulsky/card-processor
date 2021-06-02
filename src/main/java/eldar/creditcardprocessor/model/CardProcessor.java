@@ -7,6 +7,7 @@ import eldar.creditcardprocessor.model.Card.Card;
 import eldar.creditcardprocessor.model.Card.CardEnum;
 import eldar.creditcardprocessor.model.Card.NaraCard;
 import eldar.creditcardprocessor.model.Card.VisaCard;
+import eldar.creditcardprocessor.model.Operacion.Operacion;
 
 import java.time.Month;
 import java.util.ArrayList;
@@ -34,21 +35,24 @@ public class CardProcessor {
         }
     }
 
-    public void iniciarTarjetas() {
-        addCard(CardEnum.VISA, 123456, "Lionel Messi", Month.AUGUST.getValue(), 2025);
-        addCard(CardEnum.NARA, 654321, "Cristiano Ronaldo", Month.JANUARY.getValue(), 2022);
-        addCard(CardEnum.AMEX, 456789, "Kylian Mbappe", Month.MARCH.getValue(), 2020);
-    }
-
-    public void procesarOperacion(Operacion operacion) {
+    public boolean procesarOperacion(Operacion operacion){
 
         try {
             operacion.validarOperacion();
             operacion.getTarjeta().isValid(getTarjetas());
             System.out.println("Transaccion procesada");
+            return true;
         } catch (final CardProcessException | OperacionProcessException error) {
             System.out.println(error.getMessage());
+            return false;
         }
     }
 
+    public void iniciarTarjetas() {
+        addCard(CardEnum.VISA, 123456, "Lionel Messi", Month.AUGUST.getValue(), 2025);
+        addCard(CardEnum.NARA, 654321, "Cristiano Ronaldo", Month.JANUARY.getValue(), 2022);
+
+        //Esta tarjeta esta vencida
+        addCard(CardEnum.AMEX, 456789, "Kylian Mbappe", Month.MARCH.getValue(), 2020);
+    }
 }

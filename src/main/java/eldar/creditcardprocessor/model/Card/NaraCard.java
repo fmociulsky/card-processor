@@ -16,9 +16,9 @@ public class NaraCard extends Card{
     }
 
     @Override
-    public void informarTasa(double monto) {
+    public String informarTasa(double monto) {
         final double importe = monto * calcularTasa() / 100;
-        System.out.println(String.format("El importe de tasa para la tarjeta de marca %s es de %,.2f", getMarca().getValue(), importe));
+        return String.format(MSJ_TASA, getMarca().getValue(), importe);
     }
 
     static final double COEFICIENTE = 0.5;
