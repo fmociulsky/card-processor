@@ -1,8 +1,15 @@
 package eldar.creditcardprocessor.model.Operacion;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.sun.istack.internal.NotNull;
 import eldar.creditcardprocessor.exceptions.OperacionProcessException;
+import eldar.creditcardprocessor.model.Card.AmexCard;
 import eldar.creditcardprocessor.model.Card.Card;
+import eldar.creditcardprocessor.model.Card.NaraCard;
+import eldar.creditcardprocessor.model.Card.VisaCard;
 import eldar.creditcardprocessor.model.Tasa;
 
 import java.io.Serializable;

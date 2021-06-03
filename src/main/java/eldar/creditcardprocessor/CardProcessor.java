@@ -35,6 +35,10 @@ public class CardProcessor {
         }
     }
 
+    public boolean compararTarjetas(Card card1, Card card2){
+        return card1.equals(card2);
+    }
+
     public boolean procesarOperacion(Operacion operacion){
 
         try {

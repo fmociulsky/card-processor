@@ -13,7 +13,6 @@ public class CardController {
 
     @GetMapping("/obtenerTasa")
     public ResponseEntity<Tasa> getTasa(@RequestBody Operacion operacion){
-        //si no se puede mapear una clase abstracta, entonces recibir por parametro el enum de la tarje y el monto
         final Tasa tasa = operacion.informarTasa();
         return new ResponseEntity<Tasa>(tasa, HttpStatus.OK);
     }

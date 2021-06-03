@@ -1,5 +1,8 @@
 package eldar.creditcardprocessor.model.Card;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import eldar.creditcardprocessor.exceptions.CardProcessException;
 import eldar.creditcardprocessor.model.Tasa;
 
@@ -9,7 +12,12 @@ import java.util.List;
 
 import static eldar.creditcardprocessor.exceptions.CardProcessException.CardMensajesErrorEnum.CARD_DATA_WRONG;
 import static eldar.creditcardprocessor.exceptions.CardProcessException.CardMensajesErrorEnum.EXPIRED_CARD;
-
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = VisaCard.class, name = "VISA"),
+        @JsonSubTypes.Type(value = NaraCard.class, name = "NARA"),
+        @JsonSubTypes.Type(value = AmexCard.class, name = "AMEX")
+})
 public abstract class Card implements Serializable {
 
     private static final long serialVersionUID = 5853685590689946429L;
@@ -24,46 +32,6 @@ public abstract class Card implements Serializable {
         this.numero = numero;
         this.cardHolder = cardHolder;
         this.mesVencimiento = mesVencimiento;
-        this.anoVencimiento = anoVencimiento;
-    }
-
-    public CardEnum getMarca() {
-        return marca;
-    }
-
-    public void setMarca(CardEnum marca) {
-        this.marca = marca;
-    }
-
-    public Integer getNumero() {
-        return numero;
-    }
-
-    public void setNumero(Integer numero) {
-        this.numero = numero;
-    }
-
-    public String getCardHolder() {
-        return cardHolder;
-    }
-
-    public void setCardHolder(String cardHolder) {
-        this.cardHolder = cardHolder;
-    }
-
-    public int getMesVencimiento() {
-        return mesVencimiento;
-    }
-
-    public void setMesVencimiento(int mesVencimiento) {
-        this.mesVencimiento = mesVencimiento;
-    }
-
-    public int getAnoVencimiento() {
-        return anoVencimiento;
-    }
-
-    public void setAnoVencimiento(int anoVencimiento) {
         this.anoVencimiento = anoVencimiento;
     }
 
@@ -111,6 +79,47 @@ public abstract class Card implements Serializable {
     @Override
     public String toString() {
         return String.format(TO_STRING, getMarca().getValue(), getNumero(), getCardHolder(), getMesVencimiento(), getAnoVencimiento());
+    }
+
+
+    public CardEnum getMarca() {
+        return marca;
+    }
+
+    public void setMarca(CardEnum marca) {
+        this.marca = marca;
+    }
+
+    public Integer getNumero() {
+        return numero;
+    }
+
+    public void setNumero(Integer numero) {
+        this.numero = numero;
+    }
+
+    public String getCardHolder() {
+        return cardHolder;
+    }
+
+    public void setCardHolder(String cardHolder) {
+        this.cardHolder = cardHolder;
+    }
+
+    public int getMesVencimiento() {
+        return mesVencimiento;
+    }
+
+    public void setMesVencimiento(int mesVencimiento) {
+        this.mesVencimiento = mesVencimiento;
+    }
+
+    public int getAnoVencimiento() {
+        return anoVencimiento;
+    }
+
+    public void setAnoVencimiento(int anoVencimiento) {
+        this.anoVencimiento = anoVencimiento;
     }
 
     static final double MIN = 0.3;
