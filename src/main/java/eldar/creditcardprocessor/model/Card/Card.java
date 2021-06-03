@@ -2,7 +2,6 @@ package eldar.creditcardprocessor.model.Card;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import eldar.creditcardprocessor.exceptions.CardProcessException;
 import eldar.creditcardprocessor.model.Tasa;
 
@@ -12,7 +11,7 @@ import java.util.List;
 
 import static eldar.creditcardprocessor.exceptions.CardProcessException.CardMensajesErrorEnum.CARD_DATA_WRONG;
 import static eldar.creditcardprocessor.exceptions.CardProcessException.CardMensajesErrorEnum.EXPIRED_CARD;
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "marca")
 @JsonSubTypes({
         @JsonSubTypes.Type(value = VisaCard.class, name = "VISA"),
         @JsonSubTypes.Type(value = NaraCard.class, name = "NARA"),
